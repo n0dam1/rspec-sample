@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+	has_many :comments
+
 	enum status: { draft: 0, published: 1 }
 
 	def abbreviated_title
