@@ -9,4 +9,9 @@ class Article < ApplicationRecord
 		return if self.published?
 		update({ status: Article.statuses['published'], published_at: Time.current })
 	end
+
+	def break_title
+		return if title.nil?
+		title.scan(/.{1,20}/).join('\n')
+	end
 end
