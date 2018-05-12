@@ -12,9 +12,13 @@ FactoryBot.define do
       title 'とても長いタイトルを持った記事を作る属性'
     end
 
-    trait :test_callback do
-      after(:create) do
-        p 'コールバックのテスト'
+    trait :with_comments do
+      transient do
+        comments_count 5
+      end
+
+      after(:create) do |article, evaluator|
+        create_list(:comment, evaluator.comments_count, article: article)
       end
     end
   end
